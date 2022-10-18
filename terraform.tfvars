@@ -1,0 +1,5 @@
+project = "mars-365911"
+region = "europe-west2"
+user= "gcloud-infra"
+email = "gcloud-infra@mars-365911.iam.gserviceaccount.com"
+credentials_file = "$gcp_service_key"
