@@ -58,8 +58,10 @@ resource "google_compute_instance" "webserver" {
     }
     inline = [
       "sudo apt-get update",
+      "sudo apt-get -y install git",
       "sudo apt-get -y install nginx",
       "sudo nginx -v",
+      "sudo cd /var/www/html/ && git clone https://github.com/schoolofdevops/html-sample-app.git"
     ]
   }
   # Ensure firewall rule is provisioned before server, so that SSH doesn't fail.
