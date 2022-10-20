@@ -32,6 +32,15 @@ plan:
     paths:
       - planfile
 
+compliance_check:
+   stage: compliance
+   script: 
+     # - terraform plan -out plan.out
+     # - terraform show -json plan.out > plan.out.json
+     # - terraform-compliance -p plan.out.json -f compliance/
+      - snyk iac test main.tf --report
+   allow_failure: true
+
 apply:
   stage: apply
   script:
@@ -40,13 +49,12 @@ apply:
     - plan
   when: manual
 
-compliance_check:
-   stage: compliance
-   script: 
-     # - terraform plan -out plan.out
-     # - terraform show -json plan.out > plan.out.json
-     # - terraform-compliance -p plan.out.json -f compliance/
-      - snyk iac test main.tf
-   allow_failure: true
-   when: manual
+destroy:
+  stage: destroy
+  script:
+    - terraform destroy
+  dependencies:
+    - validate
+  when: manual
+
 
