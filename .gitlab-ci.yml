@@ -2,6 +2,7 @@ stages:
   - validate
   - plan
   - apply
+  - compliance
 
 image:
   name: hashicorp/terraform:light
