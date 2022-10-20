@@ -39,3 +39,13 @@ apply:
     - plan
   when: manual
 
+compliance_check:
+   stage: compliance
+   script: 
+     # - terraform plan -out plan.out
+     # - terraform show -json plan.out > plan.out.json
+     # - terraform-compliance -p plan.out.json -f compliance/
+      - snyk iac test main.tf
+   allow_failure: true
+   when: manual
+
