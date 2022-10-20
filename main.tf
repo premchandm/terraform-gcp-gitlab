@@ -7,6 +7,9 @@ resource "google_compute_firewall" "firewall" {
   name    = "firewall-externalssh"
   project = var.project
   network = "default"
+  lifecycle {
+    ignore_changes = all
+  }
   allow {
     protocol = "tcp"
     ports    = ["22"]
@@ -18,6 +21,9 @@ resource "google_compute_firewall" "webserverrule" {
   name    = "webserver"
   project = var.project
   network = "default"
+  lifecycle {
+    ignore_changes = all
+  }
   allow {
     protocol = "tcp"
     ports    = ["80","443"]
@@ -30,6 +36,9 @@ resource "google_compute_address" "static" {
   name = "vm-public-address"
   project = var.project
   region = var.region
+  lifecycle {
+    ignore_changes = all
+  }
   depends_on = [ google_compute_firewall.firewall ]
 }
 resource "google_compute_instance" "webserver" {
@@ -37,6 +46,9 @@ resource "google_compute_instance" "webserver" {
   machine_type = "e2-medium"
   zone         = "${var.region}-c"
   tags         = ["externalssh","webserver"]
+  lifecycle {
+    ignore_changes = all
+  }
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
