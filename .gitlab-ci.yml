@@ -39,7 +39,7 @@ compliance_check:
      # - terraform plan -out plan.out
      # - terraform show -json plan.out > plan.out.json
      # - terraform-compliance -p plan.out.json -f compliance/
-      - snyk iac test main.tf --report
+      - sudo snyk iac test main.tf --report
    allow_failure: true
 
 apply:
