@@ -3,6 +3,7 @@ stages:
   - plan
   - apply
   - compliance
+  - destroy
 
 image:
   name: hashicorp/terraform:light
